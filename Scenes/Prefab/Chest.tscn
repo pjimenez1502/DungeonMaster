@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck0k6hb3bxucl"]
+
+[ext_resource type="Texture2D" uid="uid://b60lr63yrc7g6" path="res://Assets/Tileset/Tileset_1.png" id="1_31481"]
+[ext_resource type="Script" path="res://Scripts/Entity/Chest.gd" id="1_dtbhd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya5vh"]
+atlas = ExtResource("1_31481")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7c0c"]
+atlas = ExtResource("1_31481")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8i5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya5vh")
+}],
+"loop": true,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7c0c")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oatgt"]
+size = Vector2(12, 11)
+
+[node name="Chest" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_dtbhd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_s8i5h")
+animation = &"Closed"
+autoplay = "Closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_oatgt")

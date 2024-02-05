@@ -1,0 +1,173 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvvbtph3sv8mf"]
+
+[ext_resource type="PackedScene" uid="uid://bb0ribtvkv8ee" path="res://Scenes/Dungeon_view.tscn" id="1_i56vv"]
+[ext_resource type="Script" path="res://Scripts/Ui_Manager.gd" id="1_uy1xg"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uy1xg")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -360.0
+offset_right = 360.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(720, 720)
+render_target_update_mode = 4
+
+[node name="Dungeon" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_i56vv")]
+
+[node name="DungeonEditing" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -313.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="DungeonEditing"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Wall" type="Button" parent="DungeonEditing/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Wall"
+
+[node name="Floor" type="Button" parent="DungeonEditing/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Floor"
+
+[node name="Door" type="Button" parent="DungeonEditing/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Door"
+
+[node name="Chest" type="Button" parent="DungeonEditing/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="StairUp" type="Button" parent="DungeonEditing/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Stair
+Up"
+
+[node name="StairDown" type="Button" parent="DungeonEditing/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Stair
+Down"
+clip_text = true
+
+[node name="DungeonPopulating" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -313.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="DungeonPopulating"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Rat" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Rat"
+
+[node name="Skeleton" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Skeleton
+"
+
+[node name="Skeleton_melee" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Skeleton
+Sword"
+
+[node name="Skeleton_ranged" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Skeleton
+Archer"
+
+[node name="Button2" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+clip_text = true
+
+[node name="Chest" type="Button" parent="DungeonPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Chest"
+
+[node name="Start" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = 33.0
+offset_top = 518.0
+offset_right = 133.0
+offset_bottom = 618.0
+text = "Next
+"
+clip_text = true
+
+[connection signal="pressed" from="DungeonEditing/GridContainer/Wall" to="SubViewportContainer/SubViewport/Dungeon" method="_on_tile_button_pressed" binds= [0]]
+[connection signal="pressed" from="DungeonEditing/GridContainer/Floor" to="SubViewportContainer/SubViewport/Dungeon" method="_on_tile_button_pressed" binds= [1]]
+[connection signal="pressed" from="DungeonEditing/GridContainer/Door" to="SubViewportContainer/SubViewport/Dungeon" method="_on_tile_button_pressed" binds= [2]]
+[connection signal="pressed" from="DungeonEditing/GridContainer/StairUp" to="SubViewportContainer/SubViewport/Dungeon" method="_on_tile_button_pressed" binds= [4]]
+[connection signal="pressed" from="DungeonEditing/GridContainer/StairDown" to="SubViewportContainer/SubViewport/Dungeon" method="_on_tile_button_pressed" binds= [5]]
+[connection signal="pressed" from="DungeonPopulating/GridContainer/Skeleton" to="SubViewportContainer/SubViewport/Dungeon" method="_on_entity_button_pressed" binds= [5]]
+[connection signal="pressed" from="DungeonPopulating/GridContainer/Skeleton_melee" to="SubViewportContainer/SubViewport/Dungeon" method="_on_entity_button_pressed" binds= [5]]
+[connection signal="pressed" from="DungeonPopulating/GridContainer/Chest" to="SubViewportContainer/SubViewport/Dungeon" method="_on_entity_button_pressed" binds= [0]]
+[connection signal="pressed" from="Start" to="." method="_on_next_pressed"]

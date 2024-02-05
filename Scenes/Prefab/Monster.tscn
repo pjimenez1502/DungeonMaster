@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtbv7tpc51fma"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/MonsterController.gd" id="1_g0og7"]
+[ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_csbm8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inp2t"]
+atlas = ExtResource("2_csbm8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2vae"]
+atlas = ExtResource("2_csbm8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_em4vt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inp2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2vae")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_keqfu"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7w3l"]
+radius = 60.0
+
+[node name="Monster" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_g0og7")
+
+[node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_em4vt")
+autoplay = "default"
+frame_progress = 0.324313
+
+[node name="MonsterCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_keqfu")
+
+[node name="Nav" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Nav"]
+path_postprocessing = 1
+
+[node name="PathfindTimer" type="Timer" parent="Nav"]
+wait_time = 0.1
+autostart = true
+
+[node name="AggroArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
+shape = SubResource("CircleShape2D_u7w3l")
+
+[connection signal="timeout" from="Nav/PathfindTimer" to="." method="_on_pathfindtimer_timeout"]
+[connection signal="body_entered" from="AggroArea" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="AggroArea" to="." method="_on_aggro_area_body_exited"]
