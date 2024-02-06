@@ -3,22 +3,22 @@
 [ext_resource type="Script" path="res://Scripts/Entity/MonsterController.gd" id="1_g0og7"]
 [ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_csbm8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_inp2t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwrkk"]
 atlas = ExtResource("2_csbm8")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2vae"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc43i"]
 atlas = ExtResource("2_csbm8")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_em4vt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_inp2t")
+"texture": SubResource("AtlasTexture_nwrkk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d2vae")
+"texture": SubResource("AtlasTexture_rc43i")
 }],
 "loop": true,
 "name": &"default",
@@ -35,13 +35,16 @@ radius = 60.0
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
+wall_min_slide_angle = 0.139626
 script = ExtResource("1_g0og7")
+BASE_SPEED = 30
 
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_em4vt")
 autoplay = "default"
-frame_progress = 0.324313
+frame = 1
+frame_progress = 0.344956
 
 [node name="MonsterCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_keqfu")
@@ -50,9 +53,10 @@ shape = SubResource("CircleShape2D_keqfu")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Nav"]
 path_postprocessing = 1
+avoidance_enabled = true
 
 [node name="PathfindTimer" type="Timer" parent="Nav"]
-wait_time = 0.1
+wait_time = 0.5
 autostart = true
 
 [node name="AggroArea" type="Area2D" parent="."]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://fqs01ephmocv"]
+
+[ext_resource type="Script" path="res://Slash.gd" id="1_634cv"]
+[ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_3xoc6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wfy7"]
+atlas = ExtResource("2_3xoc6")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmaa2"]
+atlas = ExtResource("2_3xoc6")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlokf"]
+atlas = ExtResource("2_3xoc6")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ykh5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wfy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmaa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlokf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nu4lv"]
+radius = 7.0
+
+[node name="Slash" type="Node2D"]
+script = ExtResource("1_634cv")
+
+[node name="Offset" type="Node2D" parent="."]
+position = Vector2(9, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Offset"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5ykh5")
+autoplay = "default"
+frame_progress = 0.384522
+
+[node name="SlashArea" type="Area2D" parent="Offset"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/SlashArea"]
+shape = SubResource("CircleShape2D_nu4lv")
+
+[connection signal="body_entered" from="Offset/SlashArea" to="." method="_on_slash_area_body_entered"]

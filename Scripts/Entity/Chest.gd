@@ -1,9 +1,9 @@
-extends Node2D
+extends Interactuable
+class_name Chest
 
 var open := false
 var value : int
 
-@onready var animated_sprite = $AnimatedSprite2D
 
 func interact():
 	set_open(true)

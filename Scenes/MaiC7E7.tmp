@@ -146,6 +146,11 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 text = "Chest"
 
+[node name="Phylactery" type="Button" parent="LevelPopulating/GridContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Phylactery"
+
 [node name="Stats" type="MarginContainer" parent="."]
 layout_mode = 1
 offset_right = 204.0
@@ -233,6 +238,7 @@ clip_text = true
 [connection signal="pressed" from="LevelEditing/GridContainer/StairDown" to="SubViewportContainer/SubViewport/Dungeon/EditableLevel" method="_on_entity_button_pressed" binds= [1]]
 [connection signal="pressed" from="LevelPopulating/GridContainer/Skeleton" to="SubViewportContainer/SubViewport/Dungeon/EditableLevel" method="_on_entity_button_pressed" binds= [5]]
 [connection signal="pressed" from="LevelPopulating/GridContainer/Skeleton_melee" to="SubViewportContainer/SubViewport/Dungeon/EditableLevel" method="_on_entity_button_pressed" binds= [5]]
-[connection signal="pressed" from="LevelPopulating/GridContainer/Chest" to="SubViewportContainer/SubViewport/Dungeon/EditableLevel" method="_on_entity_button_pressed" binds= [2]]
+[connection signal="pressed" from="LevelPopulating/GridContainer/Chest" to="SubViewportContainer/SubViewport/Dungeon/EditableLevel" method="_on_entity_button_pressed" binds= [0]]
+[connection signal="pressed" from="LevelPopulating/GridContainer/Phylactery" to="SubViewportContainer/SubViewport/Dungeon/EditableLevel" method="_on_entity_button_pressed" binds= [-1]]
 [connection signal="pressed" from="Back" to="." method="_on_next_pressed" binds= [-1]]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed" binds= [1]]

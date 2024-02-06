@@ -2,35 +2,57 @@ extends Control
 
 var stage : int = 0
 
-@onready var dungeon_editing = $DungeonEditing
-@onready var dungeon_populating = $DungeonPopulating
+@onready var level_editing = $LevelEditing
+@onready var level_populating = $LevelPopulating
 
 @onready var dungeon = $SubViewportContainer/SubViewport/Dungeon
+@onready var level = $SubViewportContainer/SubViewport/Dungeon/EditableLevel
 
 func _ready():
-	open_dungeon_editor()
-
-
-
-func open_dungeon_editor():
-	dungeon_editing.visible = true
-	dungeon_populating.visible = false
-	dungeon.tile_map.set_dungeon_editable(true)
-	dungeon.tile_map.set_dungeon_populating(false)
+	open_level_editor()
+	dungeon.RICHES_UPDATE.connect(update_riches)
+	dungeon.SOULS_UPDATE.connect(update_souls)
 	
-func open_dungeon_populator():
-	dungeon_editing.visible = false
-	dungeon_populating.visible = true
-	dungeon.tile_map.set_dungeon_editable(false)
-	dungeon.tile_map.set_dungeon_populating(true)
+	dungeon.dungeon_init()
 
-func play_dungeon():
-	dungeon.start_dungeon()
 
-func _on_next_pressed():
+func open_level_editor():
+	level_editing.visible = true
+	level_populating.visible = false
+	
+func open_level_populator():
+	level_editing.visible = false
+	level_populating.visible = true
+
+func play_level():
+	if !level.start_level():
+		return false
+	level_editing.visible = false
+	level_populating.visible = false
+
+
+
+func add_level():
+	pass
+	## current_level_level +1
+	## 
+
+func _on_next_pressed(value):
+	stage = clampi(stage + value, 0, 3)
 	match stage:
 		0:
-			open_dungeon_populator()
-			stage = 1
+			open_level_editor()
 		1:
-			play_dungeon()
+			open_level_populator()
+		2:
+			if !play_level():
+				stage -= 1
+
+
+@onready var riches_value = $Stats/ColorRect/MarginContainer/VBoxContainer/Riches/value
+func update_riches(value):
+	riches_value.text = str(value)
+
+@onready var souls_value = $Stats/ColorRect/MarginContainer/VBoxContainer/Souls/value
+func update_souls(value):
+	souls_value.text = str(value)
