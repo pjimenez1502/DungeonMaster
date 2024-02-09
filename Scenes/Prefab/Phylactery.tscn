@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://6h3hg6c1ddu8"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Chest.gd" id="1_x3jj8"]
+[ext_resource type="Script" path="res://Scripts/Interactuable/Chest.gd" id="1_x3jj8"]
 [ext_resource type="Texture2D" uid="uid://b60lr63yrc7g6" path="res://Assets/Tileset/Tileset_1.png" id="2_7syg4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kb3o2"]
@@ -50,7 +50,6 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_s8i5h")
 animation = &"Closed"
 autoplay = "Closed"
-frame_progress = 0.0252038
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

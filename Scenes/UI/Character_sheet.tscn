@@ -1,0 +1,228 @@
+[gd_scene load_steps=9 format=3 uid="uid://dy1tii4ana6ub"]
+
+[ext_resource type="Script" path="res://Scripts/Character_sheet.gd" id="1_dalrt"]
+[ext_resource type="Texture2D" uid="uid://diji1mhc4g831" path="res://Assets/UI/CharacterSheetBackground.png" id="1_kij8p"]
+[ext_resource type="Texture2D" uid="uid://di21l0gjp24lh" path="res://Assets/UI/PortraitBorder.png" id="2_1gd5r"]
+[ext_resource type="Texture2D" uid="uid://t5d7fpvyhgkk" path="res://Assets/Portraits/adventurer1.png" id="3_okwy8"]
+[ext_resource type="FontFile" uid="uid://bixdt13cdgeub" path="res://Assets/Fonts/Cormorant-Bold.ttf" id="5_p70lr"]
+[ext_resource type="Texture2D" uid="uid://cmfoo70pdp3dj" path="res://Assets/UI/Icons/health.png" id="6_f7dd4"]
+[ext_resource type="Texture2D" uid="uid://yb7541cqmlfb" path="res://Assets/UI/Icons/damage.png" id="7_7erw4"]
+[ext_resource type="Texture2D" uid="uid://bcfs70vrf7bj4" path="res://Assets/UI/Icons/speed.png" id="8_qeybl"]
+
+[node name="CharacterSheet" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 200.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_dalrt")
+
+[node name="Card Background" type="NinePatchRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 160)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kij8p")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Card Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Card Background/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="Portrait Margin" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 144.985)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="Portrait" type="Control" parent="Card Background/MarginContainer/VBoxContainer/Portrait Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Portrait" type="TextureRect" parent="Card Background/MarginContainer/VBoxContainer/Portrait Margin/Portrait"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 101.0
+offset_bottom = 141.0
+texture = ExtResource("3_okwy8")
+stretch_mode = 4
+
+[node name="Portrait Border" type="NinePatchRect" parent="Card Background/MarginContainer/VBoxContainer/Portrait Margin/Portrait/Portrait"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1gd5r")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Name Margin" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 0
+
+[node name="Name Border" type="NinePatchRect" parent="Card Background/MarginContainer/VBoxContainer/Name Margin"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_1gd5r")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="name" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Name Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("5_p70lr")
+theme_override_font_sizes/font_size = 20
+text = "Bolkhadar"
+horizontal_alignment = 1
+
+[node name="Level Margin" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 0
+
+[node name="level" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Level Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("5_p70lr")
+theme_override_font_sizes/font_size = 16
+text = "Adept"
+horizontal_alignment = 1
+
+[node name="Stats Margin" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95.065)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Left" type="VBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Health" type="HBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left"]
+layout_mode = 2
+
+[node name="ColorRect" type="TextureRect" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left/Health"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_f7dd4")
+
+[node name="value" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left/Health"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_p70lr")
+theme_override_font_sizes/font_size = 20
+text = "???
+"
+
+[node name="Damage" type="HBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left"]
+layout_mode = 2
+
+[node name="ColorRect" type="TextureRect" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left/Damage"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("7_7erw4")
+
+[node name="value" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left/Damage"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_p70lr")
+theme_override_font_sizes/font_size = 20
+text = "???
+"
+
+[node name="Right" type="VBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Movespeed" type="HBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right"]
+layout_mode = 2
+
+[node name="ColorRect" type="TextureRect" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right/Movespeed"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("8_qeybl")
+
+[node name="value" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right/Movespeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_p70lr")
+theme_override_font_sizes/font_size = 20
+text = "???
+"
+
+[node name="Agility" type="HBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right"]
+layout_mode = 2
+
+[node name="ColorRect" type="TextureRect" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right/Agility"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("6_f7dd4")
+
+[node name="value" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right/Agility"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_p70lr")
+theme_override_font_sizes/font_size = 20
+text = "???
+"

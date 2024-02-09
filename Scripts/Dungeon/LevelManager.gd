@@ -1,6 +1,5 @@
 extends Node2D
 
-var adventurer = preload("res://Scenes/Prefab/Adventurer.tscn")
 
 
 @onready var tile_map = $TileMap
@@ -15,29 +14,30 @@ func _on_entity_button_pressed(int_id: int):
 
 
 func start_level():
-	if !check_playable():
-		print("UNPLAYABLE")
-		return false
-		
-	var instance = adventurer.instantiate()
+	var adventurer = get_adventurer()
 	
 	var entrance = tile_map.entrance
 	var exit = tile_map.exit
 	
-	instance.position = entrance.position
-	instance.exit = exit
-	instance.treasure_list = tile_map.loot_list.get_children()
+	adventurer.global_position = entrance.global_position
+	adventurer.exit = exit
+	adventurer.treasure_list = tile_map.loot_list.get_children()
 	
-	add_child.call_deferred(instance)
-	
+	add_child.call_deferred(adventurer)
+	return true
+
+func get_adventurer():
+	var adventurer
+	if Director.current_adventurer:
+		adventurer = Director.current_adventurer
+		if adventurer.get_parent():
+			adventurer.get_parent().remove_child(adventurer)
+	else:
+		adventurer = Director.create_adventurer()
+	return adventurer
+
+
 func check_playable():
 	if !tile_map.entrance or !tile_map.exit:
 		return false
 	return true
-
-func switch_level(modifier):
-	$"..".switch_level(modifier)
-
-func _unhandled_input(event):
-	if Input.is_key_pressed(KEY_P):
-		switch_level(-1)

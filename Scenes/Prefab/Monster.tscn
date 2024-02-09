@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtbv7tpc51fma"]
+[gd_scene load_steps=11 format=3 uid="uid://dtbv7tpc51fma"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/MonsterController.gd" id="1_g0og7"]
 [ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_csbm8"]
+[ext_resource type="Texture2D" uid="uid://cbxkmd42mse4e" path="res://Assets/Portraits/skeleton.png" id="2_wblef"]
+[ext_resource type="PackedScene" uid="uid://c5a7mwl2l8yyd" path="res://Scenes/UI/health_bar.tscn" id="3_pk7mx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwrkk"]
 atlas = ExtResource("2_csbm8")
@@ -29,15 +31,21 @@ animations = [{
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7w3l"]
-radius = 60.0
+radius = 41.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cldt7"]
+radius = 16.0
 
 [node name="Monster" type="CharacterBody2D"]
 collision_layer = 3
 collision_mask = 3
+input_pickable = true
 motion_mode = 1
 wall_min_slide_angle = 0.139626
 script = ExtResource("1_g0og7")
-BASE_SPEED = 30
+portrait = ExtResource("2_wblef")
+BASE_SPEED = 20
+damage = 3
 
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -66,6 +74,18 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
 shape = SubResource("CircleShape2D_u7w3l")
 
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_cldt7")
+
+[node name="HealthBar_Manager" parent="." instance=ExtResource("3_pk7mx")]
+z_index = 4
+
 [connection signal="timeout" from="Nav/PathfindTimer" to="." method="_on_pathfindtimer_timeout"]
 [connection signal="body_entered" from="AggroArea" to="." method="_on_aggro_area_body_entered"]
 [connection signal="body_exited" from="AggroArea" to="." method="_on_aggro_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

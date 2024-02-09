@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3785r2et7s31"]
+
+[ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="1_1mbhm"]
+
+[node name="Corpse" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_1mbhm")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)

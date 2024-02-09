@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cykmfclibger3"]
+[gd_scene load_steps=11 format=3 uid="uid://cykmfclibger3"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/AdventurerController.gd" id="1_6i2gu"]
 [ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_dimr2"]
+[ext_resource type="Texture2D" uid="uid://t5d7fpvyhgkk" path="res://Assets/Portraits/adventurer1.png" id="2_p782t"]
+[ext_resource type="PackedScene" uid="uid://c5a7mwl2l8yyd" path="res://Scenes/UI/health_bar.tscn" id="3_hbfqd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_inp2t"]
 atlas = ExtResource("2_dimr2")
@@ -35,10 +37,13 @@ radius = 60.0
 radius = 16.0
 
 [node name="Adventurer" type="CharacterBody2D"]
-collision_layer = 4
+z_index = 5
+collision_layer = 5
+collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.139626
 script = ExtResource("1_6i2gu")
+portrait = ExtResource("2_p782t")
 
 [node name="InteractionTimer" type="Timer" parent="."]
 
@@ -56,6 +61,9 @@ shape = SubResource("CircleShape2D_keqfu")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Nav"]
 path_postprocessing = 1
 avoidance_enabled = true
+radius = 3.76
+debug_enabled = true
+debug_path_custom_point_size = 3.85
 
 [node name="PathfindTimer" type="Timer" parent="Nav"]
 wait_time = 0.5
@@ -74,6 +82,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_qw1dk")
+
+[node name="HealthBar_Manager" parent="." instance=ExtResource("3_hbfqd")]
 
 [connection signal="timeout" from="Nav/PathfindTimer" to="." method="_on_pathfindtimer_timeout"]
 [connection signal="body_entered" from="AggroArea" to="." method="_on_aggro_area_body_entered"]
