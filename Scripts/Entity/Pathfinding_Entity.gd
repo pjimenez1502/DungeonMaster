@@ -6,7 +6,7 @@ var corpse = load("res://Scenes/Prefab/VFX/corpse.tscn")
 var COMBAT_TEXT = load("res://Scenes/UI/Combat_Text.tscn")
 
 @export var portrait : Texture2D
-@export var BASE_SPEED = 40
+@export var speed = 40
 @export var damage := 5
 @export var max_health := 10
 var level_name : String
@@ -26,9 +26,9 @@ var in_action := false
 
 func _ready():
 	health = max_health
-	if !BASE_SPEED:
+	if !speed:
 		print("NO BASE SPEED")
-		BASE_SPEED = 30
+		speed = 30
 	nav_agent.path_desired_distance = 16
 	nav_agent.target_desired_distance = 8
 	
@@ -53,8 +53,8 @@ func pathfind_and_move():
 	direction = direction.normalized()
 	
 	#print(target_pos, " - ", global_position, " -- ", next_path_position )
-	#velocity = velocity.lerp(direction * BASE_SPEED, acceleration * delta)
-	velocity = direction * BASE_SPEED
+	#velocity = velocity.lerp(direction * speed, acceleration * delta)
+	velocity = direction * speed
 	move_and_slide()
 
 

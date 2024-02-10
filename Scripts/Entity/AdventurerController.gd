@@ -85,22 +85,31 @@ func check_interact():
 		super.check_interact()
 
 func die():
-	Director.adventurer_death()
+	var reward = calculate_death_reward()
+	Director.adventurer_death(reward)
 	super.die()
 
-var stats_per_level = {
+@export var stats_per_level = {
 	"health": {"min": 2, "max": 10},
 	"damage": {"min": 1, "max": 5},
 	"speed": {"min": 0, "max": 4},
 }
+@export var reward_per_level = 4
+
+func calculate_death_reward():
+	var reward := randi_range(1, reward_per_level)
+	for i in range(0, level):
+		reward += randi_range(1, reward_per_level)
+	return reward
 
 func calculate_level(level):
 	print("CALCULING ADVENTURER LEVEL: ", level)
+	level = level
 	level_name = level_dictionary[level]
 	for i in range(0, level):
 		max_health += randi_range(stats_per_level["health"]["min"], stats_per_level["health"]["max"])
 		damage += randi_range(stats_per_level["damage"]["min"], stats_per_level["damage"]["max"]) 
-		BASE_SPEED += randi_range(stats_per_level["speed"]["min"], stats_per_level["speed"]["max"]) 
+		speed += randi_range(stats_per_level["speed"]["min"], stats_per_level["speed"]["max"]) 
 	
 	
 	#max_health += (randi_range(stats_per_level["health"]["min"], stats_per_level["health"]["max"]) * level)

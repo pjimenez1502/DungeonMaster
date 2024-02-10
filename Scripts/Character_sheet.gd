@@ -9,7 +9,6 @@ extends Control
 @onready var character_name_label = $"Card Background/MarginContainer/VBoxContainer/Name Margin/name"
 @onready var level_label = $"Card Background/MarginContainer/VBoxContainer/Level Margin/level"
 
-@onready var agility = $"Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right/Agility/value"
 
 var health
 var damage
@@ -30,7 +29,7 @@ func _ready():
 func load_sheet_data(character):
 	health = str(character.max_health)
 	damage = str(character.damage)
-	movespeed = str(character.BASE_SPEED)
+	movespeed = str(character.speed)
 	
 	portrait = character.portrait
 	char_name = character.name

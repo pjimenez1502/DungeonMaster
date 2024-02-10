@@ -6,6 +6,7 @@ signal DAY_UPDATE
 signal RENOUN_UPDATE
 
 signal DAY_END
+signal SHOW_CHART
 
 var DUNGEON : Node2D
 
@@ -47,10 +48,10 @@ func update_renoun(value):
 	RENOUN_UPDATE.emit(renoun)
 
 
-func adventurer_death():
+func adventurer_death(reward):
 	
 	restore_adventurer_looted()
-	update_souls(+1)
+	update_souls(reward)
 	
 	DAY_END.emit()
 	update_day()
@@ -108,9 +109,16 @@ func create_adventurer():
 	instance.calculate_level(Director.renoun)
 
 	return instance
-
-var character_sheet = load("res://Scenes/UI/Character_sheet.tscn")
+	
+const CHARACTER_SHEET = preload("res://Scenes/UI/Character_sheet.tscn")
 func get_sheet() -> Node:
-	var sheet = character_sheet.instantiate()
+	var sheet = CHARACTER_SHEET.instantiate()
 	sheet.load_sheet_data(current_adventurer)
 	return sheet
+
+const CHARACTER_CHART = preload("res://Scenes/UI/Character_chart.tscn")
+func show_chart(caracter):
+	var chart = CHARACTER_CHART.instantiate()
+	chart.load_sheet_data(caracter)
+	SHOW_CHART.emit(chart)
+	return chart

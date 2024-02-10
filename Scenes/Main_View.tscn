@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bixdt13cdgeub" path="res://Assets/Fonts/Cormorant-Bold.ttf" id="4_yfjhj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eifu6"]
+radius = 4.0
 
 [node name="UI" type="Control"]
 layout_mode = 3

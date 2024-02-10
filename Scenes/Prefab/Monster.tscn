@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dtbv7tpc51fma"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/MonsterController.gd" id="1_g0og7"]
+[ext_resource type="Texture2D" uid="uid://7wg58vccjad0" path="res://Assets/Portraits/Monsters/skeleton.png" id="2_1ln66"]
 [ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_csbm8"]
-[ext_resource type="Texture2D" uid="uid://cbxkmd42mse4e" path="res://Assets/Portraits/skeleton.png" id="2_wblef"]
 [ext_resource type="PackedScene" uid="uid://c5a7mwl2l8yyd" path="res://Scenes/UI/health_bar.tscn" id="3_pk7mx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwrkk"]
@@ -43,8 +43,7 @@ input_pickable = true
 motion_mode = 1
 wall_min_slide_angle = 0.139626
 script = ExtResource("1_g0og7")
-portrait = ExtResource("2_wblef")
-BASE_SPEED = 20
+portrait = ExtResource("2_1ln66")
 damage = 3
 
 [node name="MonsterSprite" type="AnimatedSprite2D" parent="."]

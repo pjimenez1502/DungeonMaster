@@ -21,6 +21,8 @@ func _ready():
 	
 	Director.DAY_END.connect(reset_editable_ui)
 	Director.dungeon_init()
+	
+	Director.SHOW_CHART.connect(show_chart)
 
 func reset_editable_ui():
 	next_day_screen.show_screen()
@@ -99,3 +101,7 @@ func show_adventurer_sheet(sheet: Node):
 func show_builddungeon_sheet(value):
 	dungeon_build_sheet.visible = value
 ## INFO SHEETS PANEL
+
+func show_chart(chart):
+	add_child(chart)
+	chart.position = get_global_mouse_position() + Vector2(20, -100)
