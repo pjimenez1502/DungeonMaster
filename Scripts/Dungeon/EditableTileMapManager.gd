@@ -158,6 +158,7 @@ func place_entity(entity_id):
 				return
 			Director.update_souls(-1)
 			monster_list.add_child(instance)
+			$"..".level_monster_list.append(instance)
 		_:
 			print("NO MATCH")
 			
@@ -165,7 +166,12 @@ func place_entity(entity_id):
 	entity_grid[location.x][location.y]["object"] = instance
 
 func combine_entity(location):
-	print(entity_grid[location.x][location.y])
+	#print("COMBINATION")
+	#print("selected: ", selected_entity)
+	#print("already_placed: ", entity_grid[location.x][location.y])
+	if(selected_entity["id"] == entity_grid[location.x][location.y]["id"]) and Director.souls > 0:
+		entity_grid[location.x][location.y]["object"].level_up()
+		Director.update_souls(-1)
 	pass
 
 func compare_tile(location):

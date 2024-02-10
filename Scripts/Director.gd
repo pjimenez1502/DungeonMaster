@@ -7,7 +7,6 @@ signal RENOUN_UPDATE
 
 signal DAY_END
 
-
 var DUNGEON : Node2D
 
 @export var riches := 200
@@ -65,8 +64,12 @@ func adventurer_death():
 
 func heal_monsters():
 	for monster in DUNGEON.get_child(0).get_node("MonsterList").get_children():
-		if monster is Monster:
-			monster.reset_health()
+		if !monster is Monster:
+			monster.queue_free()
+	for monster in DUNGEON.get_child(0).level_monster_list:
+		if !monster.get_parent():
+			DUNGEON.get_child(0).get_node("MonsterList").add_child(monster)
+		monster.reset_health()
 
 
 func looted_riches(value):
@@ -91,7 +94,8 @@ func calculate_renoun():
 	pass
 
 func game_over():
-	print("GAME OVER")
+	#print("GAME OVER")
+	pass
 	
 func _unhandled_input(event):
 	if Input.is_key_pressed(KEY_P):

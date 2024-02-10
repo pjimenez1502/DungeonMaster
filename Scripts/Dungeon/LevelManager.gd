@@ -1,7 +1,6 @@
 extends Node2D
 
-
-
+var level_monster_list = []
 @onready var tile_map = $TileMap
 
 func _on_tile_button_pressed(tile_value: int):

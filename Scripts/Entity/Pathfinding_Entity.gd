@@ -78,19 +78,20 @@ func instantiate_attack(target):
 
 
 func recieve_damage(damage):
-	health -= damage
-	health_bar_manager.hb_damage(damage)
-	if health <= 0:
-		die()
 	var combat_text = COMBAT_TEXT.instantiate()
 	add_child(combat_text)
 	combat_text.start_combat_text(str(damage), Vector2(8, -8), 32, 16)
 	
+	health -= damage
+	health_bar_manager.hb_damage(damage)
+	if health <= 0:
+		die()
+	
 
 func die():
 	spawn_corpse()
-	queue_free()
-	pass
+	get_parent().remove_child(self)
+	#queue_free()
 
 func spawn_corpse():
 	var corpse_instance = corpse.instantiate()

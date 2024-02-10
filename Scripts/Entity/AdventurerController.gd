@@ -92,9 +92,6 @@ var stats_per_level = {
 	"health": {"min": 2, "max": 10},
 	"damage": {"min": 1, "max": 5},
 	"speed": {"min": 0, "max": 4},
-	"dodge_chance": {"min": 1, "max": 5},
-	"block_change": {"min": 0, "max": 0},
-	"attack_delay": {"min": 0, "max": 0},
 }
 
 func calculate_level(level):
