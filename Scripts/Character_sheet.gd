@@ -1,13 +1,12 @@
 extends Control
 
+@onready var health_label = %HealthLabel
+@onready var damage_label = %DamageLabel
+@onready var movespeed_label = %MovespeedLabel
 
-@onready var health_label = $"Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left/Health/value"
-@onready var damage_label = $"Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Left/Damage/value"
-@onready var movespeed_label = $"Card Background/MarginContainer/VBoxContainer/Stats Margin/MarginContainer/HBoxContainer/Right/Movespeed/value"
-
-@onready var portrait_label = $"Card Background/MarginContainer/VBoxContainer/Portrait Margin/Portrait/Portrait"
-@onready var character_name_label = $"Card Background/MarginContainer/VBoxContainer/Name Margin/name"
-@onready var level_label = $"Card Background/MarginContainer/VBoxContainer/Level Margin/level"
+@onready var portrait_label = %Portrait
+@onready var character_name_label = %NameLabel
+@onready var level_label = %LevelLabel
 
 
 var health

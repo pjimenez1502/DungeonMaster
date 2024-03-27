@@ -12,5 +12,6 @@ func init_slash(set_damage, mask):
 	damage = set_damage
 
 func _on_slash_area_body_entered(body):
-	if body is PathfindingEntity:
-		body.recieve_damage(damage)
+	pass
+	#if body is PathfindingEntity:
+		#body.recieve_damage(damage)

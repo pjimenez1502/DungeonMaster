@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cykmfclibger3"]
+[gd_scene load_steps=12 format=3 uid="uid://cykmfclibger3"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/AdventurerController.gd" id="1_6i2gu"]
 [ext_resource type="Texture2D" uid="uid://jncmsvl8pq53" path="res://Assets/Characters/Character_tiles.png" id="2_dimr2"]
 [ext_resource type="Texture2D" uid="uid://t5d7fpvyhgkk" path="res://Assets/Portraits/adventurer1.png" id="2_p782t"]
 [ext_resource type="PackedScene" uid="uid://c5a7mwl2l8yyd" path="res://Scenes/UI/health_bar.tscn" id="3_hbfqd"]
+[ext_resource type="Texture2D" uid="uid://cutiga7sp44uq" path="res://Assets/Portraits/adventurer1_50.png" id="4_rfsru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_inp2t"]
 atlas = ExtResource("2_dimr2")
@@ -53,15 +54,22 @@ sprite_frames = SubResource("SpriteFrames_em4vt")
 autoplay = "default"
 frame_progress = 0.324313
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_rfsru")
+
 [node name="AdventurerCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_keqfu")
 
 [node name="Nav" type="Node2D" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Nav"]
+path_max_distance = 300.0
 path_postprocessing = 1
 avoidance_enabled = true
-radius = 3.76
+radius = 16.0
 debug_enabled = true
 debug_path_custom_point_size = 3.85
 

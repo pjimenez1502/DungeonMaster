@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dy1tii4ana6ub"]
 
-[ext_resource type="Script" path="res://Scripts/Character_chart.gd" id="1_fatvy"]
+[ext_resource type="Script" path="res://Scripts/Character_sheet.gd" id="1_4mi12"]
 [ext_resource type="Texture2D" uid="uid://diji1mhc4g831" path="res://Assets/UI/CharacterSheetBackground.png" id="1_kij8p"]
 [ext_resource type="Texture2D" uid="uid://di21l0gjp24lh" path="res://Assets/UI/PortraitBorder.png" id="2_1gd5r"]
 [ext_resource type="Texture2D" uid="uid://t5d7fpvyhgkk" path="res://Assets/Portraits/adventurer1.png" id="3_okwy8"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://yb7541cqmlfb" path="res://Assets/UI/Icons/damage.png" id="7_7erw4"]
 [ext_resource type="Texture2D" uid="uid://bcfs70vrf7bj4" path="res://Assets/UI/Icons/speed.png" id="8_qeybl"]
 
-[node name="CharacterSheet" type="Control"]
+[node name="CharacterSheet2" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -21,7 +21,7 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_fatvy")
+script = ExtResource("1_4mi12")
 
 [node name="Card Background" type="NinePatchRect" parent="."]
 texture_filter = 1
@@ -76,6 +76,7 @@ offset_top = 1.0
 offset_right = 101.0
 offset_bottom = 141.0
 texture = ExtResource("3_okwy8")
+expand_mode = 5
 stretch_mode = 4
 
 [node name="Portrait Border" type="NinePatchRect" parent="Card Background/MarginContainer/VBoxContainer/Portrait Margin/Portrait/Portrait"]

@@ -61,6 +61,8 @@ func pathfind_and_move():
 func check_interact():
 	if targets_in_range.size() > 0:
 		instantiate_attack(targets_in_range[0])
+		if target.is_inside_tree():
+			target.recieve_damage(damage)
 		pass
 
 func instantiate_attack(target):
@@ -72,12 +74,13 @@ func instantiate_attack(target):
 	slash_instance.init_slash(damage, enemy_mask)
 	slash_instance.look_at(target.global_position)
 
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(2).timeout
 	in_action = false
 
 
 
 func recieve_damage(damage):
+	damage = damage/2
 	var combat_text = COMBAT_TEXT.instantiate()
 	add_child(combat_text)
 	combat_text.start_combat_text(str(damage), Vector2(8, -8), 32, 16)
@@ -86,7 +89,7 @@ func recieve_damage(damage):
 	health_bar_manager.hb_damage(damage)
 	if health <= 0:
 		die()
-	
+
 
 func die():
 	spawn_corpse()

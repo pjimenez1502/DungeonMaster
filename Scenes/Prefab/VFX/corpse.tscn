@@ -6,4 +6,4 @@
 texture_filter = 1
 texture = ExtResource("1_1mbhm")
 region_enabled = true
-region_rect = Rect2(0, 64, 16, 16)
+region_rect = Rect2(0, 96, 16, 16)

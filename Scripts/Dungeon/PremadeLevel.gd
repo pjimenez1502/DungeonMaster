@@ -9,7 +9,7 @@ extends TileMap
 
 func _ready():
 	boss_room.tile_map = self
-	boss_room.start_level()
+	#boss_room.start_level()
 
 
 func get_tile_real_position(tile: Vector2i) -> Vector2:

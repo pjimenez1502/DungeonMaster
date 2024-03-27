@@ -43,7 +43,6 @@ func set_max_HP(value, color):
 	HP = value
 	
 func set_HP(value):
-	print("hp set to: ", value)
 	HP = value
 	healthBar.set_value(value)
 

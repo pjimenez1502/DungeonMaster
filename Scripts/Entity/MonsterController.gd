@@ -5,13 +5,25 @@ var starting_pos
 var level := 1
 var xp := 0
 
+@onready var monster_sprite = $MonsterSprite
 
+@export var starting_stats = {
+	"health": 10,
+	"damage": 3,
+	"speed": 20,
+}
 
 func _ready():
 	super._ready()
+	
+	health = starting_stats["health"]
+	damage = starting_stats["damage"]
+	speed = starting_stats["speed"]
+	
+	xp_to_level = level * 2
+	
 	enemy_mask = 0b100
 	starting_pos = position
-	level_name = str(level, " : ", xp, " / 2")
 
 func monster_pathfind():
 	if targets_on_sight.size() == 0:
@@ -29,14 +41,14 @@ func _on_pathfindtimer_timeout():
 	if target_pos:
 		nav_agent.target_position = target_pos
 		
-var stats_per_level = {
+@export var stats_per_level = {
 	"health": {"min": 6, "max": 6},
 	"damage": {"min": 3, "max": 3},
 	"speed": {"min": 0, "max": 0},
 }
+var xp_to_level
 func level_up():
-	
-	var xp_to_level = level * 2
+	xp_to_level = level * 2
 	xp += 1
 	if xp >= xp_to_level:
 		print("LEVELUP")
@@ -46,5 +58,5 @@ func level_up():
 		health = max_health
 		damage += randi_range(stats_per_level["damage"]["min"], stats_per_level["damage"]["max"]) 
 		speed += randi_range(stats_per_level["speed"]["min"], stats_per_level["speed"]["max"])
-		
-	level_name = str(level, " : ", xp, " / ", xp_to_level)
+		monster_sprite.play(str(level))
+	Director.show_chart(self)

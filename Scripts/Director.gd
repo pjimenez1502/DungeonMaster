@@ -1,7 +1,7 @@
 extends Node
 
 signal RICHES_UPDATE
-signal SOULS_UPDATE
+signal RESOURCES_UPDATE
 signal DAY_UPDATE
 signal RENOUN_UPDATE
 
@@ -10,8 +10,12 @@ signal SHOW_CHART
 
 var DUNGEON : Node2D
 
-@export var riches := 200
-@export var souls := 3
+@export var riches := 100
+@export var resources = {
+	"soul": 1,
+	"flesh": 1,
+	"iron": 1,
+}
 var current_day := 0
 var current_time
 
@@ -27,7 +31,7 @@ var level_dictionary = {
 
 func dungeon_init():
 	update_riches()
-	update_souls()
+	update_resources()
 	DAY_UPDATE.emit(current_day)
 
 
@@ -36,10 +40,29 @@ func update_riches(value = null):
 	if value:
 		riches += value
 	RICHES_UPDATE.emit(riches)
-func update_souls(value = null):
+func update_resources(value = null):
+	
 	if value:
-		souls += value
-	SOULS_UPDATE.emit(souls)
+		if !check_enough_res(value):
+			print("nuhuh")
+			return false
+		
+		resources["soul"] += value["soul"]
+		resources["flesh"] += value["flesh"]
+		resources["iron"] += value["iron"]
+		
+	RESOURCES_UPDATE.emit(resources)
+	return true
+
+func check_enough_res(value):
+	if (resources["soul"] + value["soul"]) < 0:
+		return false
+	if (resources["flesh"] + value["flesh"]) < 0:
+		return false
+	if (resources["iron"] + value["iron"]) < 0:
+		return false
+	return true
+	
 func update_day():
 	current_day += 1
 	DAY_UPDATE.emit(current_day)
@@ -51,7 +74,7 @@ func update_renoun(value):
 func adventurer_death(reward):
 	
 	restore_adventurer_looted()
-	update_souls(reward)
+	update_resources(reward)
 	
 	DAY_END.emit()
 	update_day()
@@ -90,10 +113,6 @@ func switch_level(modifier):
 	DUNGEON.remove_child(DUNGEON.get_child(0))
 	DUNGEON.add_child(instance)
 
-func calculate_renoun():
-	## Get a value depending on amount of riches spent on the dungeon to influence adventurer spawn
-	pass
-
 func game_over():
 	#print("GAME OVER")
 	pass
@@ -116,9 +135,12 @@ func get_sheet() -> Node:
 	sheet.load_sheet_data(current_adventurer)
 	return sheet
 
+var current_chart
 const CHARACTER_CHART = preload("res://Scenes/UI/Character_chart.tscn")
 func show_chart(caracter):
-	var chart = CHARACTER_CHART.instantiate()
-	chart.load_sheet_data(caracter)
-	SHOW_CHART.emit(chart)
-	return chart
+	if current_chart != null:
+		current_chart.queue_free()
+	current_chart = CHARACTER_CHART.instantiate()
+	current_chart.load_sheet_data(caracter)
+	SHOW_CHART.emit(current_chart)
+	return current_chart

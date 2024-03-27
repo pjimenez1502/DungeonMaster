@@ -5,7 +5,7 @@ var stage : int = 0
 @onready var level_editing = $Right_Panel/LevelEditing
 @onready var level_populating = $Right_Panel/LevelPopulating
 
-@onready var level = $SubViewportContainer/SubViewport/Dungeon/EditableLevel
+@onready var level = $SubViewportContainer/SubViewport/Dungeon/Level
 @onready var next_day_screen = $NextDayScreen
 
 
@@ -15,7 +15,7 @@ func _ready():
 	
 	open_level_editor()
 	Director.RICHES_UPDATE.connect(update_riches)
-	Director.SOULS_UPDATE.connect(update_souls)
+	Director.RESOURCES_UPDATE.connect(update_resources)
 	Director.DAY_UPDATE.connect(update_day)
 	Director.RENOUN_UPDATE.connect(update_renoun)
 	
@@ -26,9 +26,9 @@ func _ready():
 
 func reset_editable_ui():
 	next_day_screen.show_screen()
-	stage = 0
+	stage = 1
+	$LeftPanel/Back.visible = false
 	_on_next_pressed(0)
-	
 
 func open_level_editor():
 	level_editing.visible = true
@@ -44,8 +44,7 @@ func open_level_populator():
 	level.get_adventurer()
 	var sheet = Director.get_sheet()
 	show_adventurer_sheet(sheet)
-	
-	
+
 
 func play_level():
 	if !level.start_level():
@@ -74,10 +73,16 @@ func _on_next_pressed(value):
 func update_riches(value):
 	riches_value.text = str(value)
 
-@onready var souls_value = $LeftPanel/Stats/ColorRect/MarginContainer/VBoxContainer/Souls/value
-func update_souls(value):
-	souls_value.text = str(value)
-	
+@onready var soul_count = %SoulCount
+@onready var flesh_count = %FleshCount
+@onready var iron_count = %IronCount
+
+func update_resources(value):
+	soul_count.text = str(value["soul"])
+	flesh_count.text = str(value["flesh"])
+	iron_count.text = str(value["iron"])
+
+
 @onready var day_value = $LeftPanel/Stats/ColorRect/MarginContainer/VBoxContainer/Day/value
 func update_day(value):
 	day_value.text = str(value)
@@ -105,3 +110,12 @@ func show_builddungeon_sheet(value):
 func show_chart(chart):
 	add_child(chart)
 	chart.position = get_global_mouse_position() + Vector2(20, -100)
+
+
+
+
+func set_selected_tile(tile):
+	level._on_tile_button_pressed(tile)
+	
+func set_selected_entity(entity):
+	level._on_entity_button_pressed(entity)

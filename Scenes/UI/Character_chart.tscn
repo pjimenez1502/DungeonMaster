@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://wi8dav4pmdbk"]
+[gd_scene load_steps=11 format=3 uid="uid://wi8dav4pmdbk"]
 
 [ext_resource type="Script" path="res://Scripts/Character_chart.gd" id="1_22s7b"]
 [ext_resource type="Texture2D" uid="uid://diji1mhc4g831" path="res://Assets/UI/CharacterSheetBackground.png" id="2_d2ir1"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cmfoo70pdp3dj" path="res://Assets/UI/Icons/health.png" id="6_runu1"]
 [ext_resource type="Texture2D" uid="uid://yb7541cqmlfb" path="res://Assets/UI/Icons/damage.png" id="7_uw35m"]
 [ext_resource type="Texture2D" uid="uid://bcfs70vrf7bj4" path="res://Assets/UI/Icons/speed.png" id="8_m0h33"]
+[ext_resource type="Texture2D" uid="uid://cxb4bf0fh0bji" path="res://Assets/UI/Healthbar_texture.png" id="9_ck6gn"]
+[ext_resource type="Texture2D" uid="uid://rj38roik2pp" path="res://Assets/UI/Healthbar_progress_texture.png" id="10_33ffo"]
 
 [node name="CharacterSheet" type="Control"]
 z_as_relative = false
@@ -15,11 +17,11 @@ layout_mode = 3
 anchor_left = 0.413
 anchor_top = 0.355
 anchor_right = 0.587
-anchor_bottom = 0.645
-offset_left = 0.223969
-offset_top = -0.0400085
+anchor_bottom = 0.63
+offset_left = 0.223999
+offset_top = -0.0399933
 offset_right = -0.223999
-offset_bottom = 0.039978
+offset_bottom = -0.240021
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(102, 94)
@@ -161,51 +163,29 @@ theme_override_font_sizes/font_size = 20
 text = "???
 "
 
-[node name="Name Margin" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
+[node name="ResourceBars" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
 
-[node name="Name Border" type="NinePatchRect" parent="Card Background/MarginContainer/VBoxContainer/Name Margin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Card Background/MarginContainer/VBoxContainer/ResourceBars"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Card Background/MarginContainer/VBoxContainer/ResourceBars/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_mk2nt")
+text = "XP
+"
+horizontal_alignment = 1
+
+[node name="XpBar" type="TextureProgressBar" parent="Card Background/MarginContainer/VBoxContainer/ResourceBars/VBoxContainer"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("4_pa4mw")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="NameLabel" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Name Margin"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("5_mk2nt")
-theme_override_font_sizes/font_size = 20
-text = "Bolkhadar"
-horizontal_alignment = 1
-
-[node name="Level Margin" type="MarginContainer" parent="Card Background/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 0
-
-[node name="LevelLabel" type="Label" parent="Card Background/MarginContainer/VBoxContainer/Level Margin"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("5_mk2nt")
-theme_override_font_sizes/font_size = 16
-text = "Adept"
-horizontal_alignment = 1
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("9_ck6gn")
+texture_progress = ExtResource("10_33ffo")
